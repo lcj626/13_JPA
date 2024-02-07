@@ -18,7 +18,7 @@ public class Menu {
     @Column(name = "menu_price")
     private int menuPrice;
 
-    @JoinColumn(name = "category_code")
+    @Column(name = "category_code")
     private int category;
 
     public Menu() {
