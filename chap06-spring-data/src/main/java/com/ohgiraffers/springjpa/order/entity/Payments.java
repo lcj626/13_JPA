@@ -8,8 +8,9 @@ import java.util.Date;
 @Table(name = "tbl_payments")
 public class Payments {
 
+
     @Id
-    @Column(name = "payment_code")
+    @Column(name = "payments_code")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int paymentsCode;
 
@@ -58,7 +59,6 @@ public class Payments {
     public String toString() {
         return "Payments{" +
                 "paymentsCode=" + paymentsCode +
-                ", menuOrder=" + menuOrder +
                 ", paymentsDate=" + paymentsDate +
                 '}';
     }

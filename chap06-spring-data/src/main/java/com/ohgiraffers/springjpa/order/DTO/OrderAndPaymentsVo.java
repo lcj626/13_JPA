@@ -48,7 +48,7 @@ public class OrderAndPaymentsVo {
 
     @Override
     public String toString() {
-        return "OrderAndPaymentsVo{" +
+        return "OrderAndPaymentsVO{" +
                 "menuCode=" + menuCode +
                 ", orderDate=" + orderDate +
                 ", payments=" + payments +

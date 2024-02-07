@@ -9,17 +9,20 @@ import java.util.Objects;
 @Service
 public class MenuFindImpl implements MenuFind{
 
+
     @Autowired
     private MenuService menuService;
 
     @Override
     public Integer findMenu(int menuCode) {
-        Integer findCode = menuService.findMenuCode(menuCode);
 
 //        if(Objects.isNull(findCode)){
 //            return null;
 //        } 의미 없음
 
+        Integer findCode = menuService.findMenuCode(menuCode);
+
         return findCode;
     }
 }
+

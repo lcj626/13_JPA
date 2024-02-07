@@ -2,6 +2,7 @@ package com.ohgiraffers.springjpa.category.entity;
 
 import jakarta.persistence.*;
 
+
 @Entity
 @Table(name = "tbl_category")
 public class Category {

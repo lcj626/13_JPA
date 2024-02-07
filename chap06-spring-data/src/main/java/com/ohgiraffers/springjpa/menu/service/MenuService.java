@@ -18,26 +18,27 @@ public class MenuService {
     private MenuRepository menuRepository;
 
     @Autowired
-    private CategoryFind categoryFind; // 결합구조 느슨하게 만들기 위해 CategoryService랑 바로 연결짓지 않고 CategoryFind로 연결
+    private CategoryFind categoryFind; // 느슨한 결합구조를 위하여 service를 직접 넣지않음
+    public Object insertMenu(MenuDTO menuDTO) {
+        System.out.println(menuDTO);
 
-    public Object insertMenu(MenuDTO menuDTO){
         // 메뉴 이름이 존재하는가
         Menu menu = menuRepository.findByMenuName(menuDTO.getMenuName());
 
         if(!Objects.isNull(menu)){
-            return new String(menuDTO.getMenuName() + "의 메뉴가 존재 한다");
+            return new String(menuDTO.getMenuName() + "의 메뉴가 존재 한다.");
         }
 
-        //가격 정보 확인
-        if((menuDTO.getMenuPrice() < 0)){
-            return new String(menuDTO.getMenuPrice() + "이걸 팔아서 장사를 어떻게 해?");
+        // 가격 정보 확인
+        if((menuDTO.getMenuPrice() < 0) ){
+            return new String(menuDTO.getMenuPrice() + "이걸 팔아서 장사를 어떻게해?");
         }
 
-        //카테고리 코드
+        // 카테고리 코드
         Integer categoryCode = categoryFind.getCategory(menuDTO.getCategoryCode());
 
         if(Objects.isNull(categoryCode)){
-            return new String(menuDTO.getCategoryCode() + "는 존재하지 않습니다");
+            return new String(menuDTO.getCategoryCode() + "는 존재하지 않습니다.");
         }
 
         Menu newMenu = new Menu();
@@ -48,9 +49,10 @@ public class MenuService {
         Menu result = menuRepository.save(newMenu);
 
         return result;
+
     }
 
-    public Integer findMenuCode(Integer menuCode){
+    public Integer findMenuCode(Integer menuCode) {
 
         Menu findMenu = menuRepository.findByMenuCode(menuCode);
 
@@ -59,7 +61,5 @@ public class MenuService {
         }
 
         return findMenu.getMenuCode();
-
-
     }
 }

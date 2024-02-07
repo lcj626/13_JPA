@@ -3,6 +3,7 @@ package com.ohgiraffers.springjpa.order.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ohgiraffers.springjpa.menu.entity.Menu;
 import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,7 +18,6 @@ public class MenuOrder {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int orderCode;
 
-
     @Column(name = "menu_code", nullable = false)
     private Integer menu;
 
@@ -26,7 +26,7 @@ public class MenuOrder {
     private Date orderDate;
 
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "menuOrder")
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "menuOrder")   // 연관관계의 주인은 payments지만 order가 생겨야 결제가 발생하기 때문에 여기가 생성의 주체가 됨.
     private List<Payments> payments = new ArrayList<>();
 
     public MenuOrder() {
@@ -75,7 +75,6 @@ public class MenuOrder {
     public String toString() {
         return "MenuOrder{" +
                 "orderCode=" + orderCode +
-                ", menu=" + menu +
                 ", orderDate=" + orderDate +
                 ", payments=" + payments +
                 '}';
