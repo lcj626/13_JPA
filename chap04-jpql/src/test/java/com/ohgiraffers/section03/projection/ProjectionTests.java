@@ -62,7 +62,7 @@ public class ProjectionTests {
         String jpql = "SELECT m FROM menu_section03 m";
         List<Menu> menuList = entityManager.createQuery(jpql, Menu.class).getResultList(); // 조회해 온 것은 영속성 컨텍스트에서 관리
 
-        Assertions.assertNotNull(menuList);
+        Assertions.assertNotNull(menuList); // menuList가 null이 아님을 확인
 
         EntityTransaction entityTransaction = entityManager.getTransaction(); // db 변화 다루는 곳
         entityTransaction.begin();
@@ -76,11 +76,11 @@ public class ProjectionTests {
         int menuCodeParametetr = 3;
 
         //hen
-        String jpql = "SELECT m.category FROM bidirection_menu m WHERE m.menuCode = :menuCode";
+        String jpql = "SELECT m.category FROM bidirection_menu m WHERE m.menuCode = :menuCode"; // bidrection_menu 엔티티에서 menuCode가 주어진 값과 일치하는 엔티티의 category 속성 조회
 
-        BiDirectionCategory categoryOfMenu = entityManager.createQuery(jpql,BiDirectionCategory.class)
-                .setParameter("menuCode",menuCodeParametetr)
-                .getSingleResult();
+        BiDirectionCategory categoryOfMenu = entityManager.createQuery(jpql,BiDirectionCategory.class) // BiDirectionCategory.class <- 결과를 매핑할 엔티티 클래스
+                .setParameter("menuCode",menuCodeParametetr) // menuCode라는 파라미터에 menuCodeParameter(3) 값을 설정
+                .getSingleResult(); // jpql 쿼리를 실행하고 결과를 단일 객체로 가지고 옴, 이 메소드는 결과가 정확히 하나인 경우에 사용
 
         Assertions.assertNotNull(categoryOfMenu);
         System.out.println(categoryOfMenu);
@@ -93,8 +93,8 @@ public class ProjectionTests {
     void 임베디드_타입_프로젝션_테스트(){
 
         //when
-        String jpql = "SELECT m.menuInfo FROM embedded_menu m";
-        List<MenuInfo> menuInfoList = entityManager.createQuery(jpql, MenuInfo.class).getResultList();
+        String jpql = "SELECT m.menuInfo FROM embedded_menu m"; // embedded_menu 엔티티의 menuInfo 필드를 조회.  menuInfo는 임베디드 타입인 MenuInfo의 인스턴스
+        List<MenuInfo> menuInfoList = entityManager.createQuery(jpql, MenuInfo.class).getResultList(); // jpql 쿼리 실행 MenuInfo 타입으로 결과 매핑. MenuInfo 객체의 리스트가 출력
 
         Assertions.assertNotNull(menuInfoList);
         menuInfoList.forEach(System.out::println);

@@ -21,14 +21,15 @@ public class CategoryService {
         /*        Category category = categoryRepository.findByCategoryCode(categoryCode);*/
 
         Category category = categoryRepository.findByCategoryCode(categoryCode);
+        // 주어진 categoryCode에 해당하는 카테고리를 데이터베이스에서 찾는다
 
 
         if (Objects.isNull(category.getCategoryCode())){
             return null;
-        }
+        } // categoryCode 가 null이면 null 반환하고
 
 
-        return category.getCategoryCode();
+        return category.getCategoryCode(); // 아니면 categoryCode 반환
     }
 
 
